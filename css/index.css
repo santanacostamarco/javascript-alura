@@ -100,24 +100,22 @@ label{
 button{
 	padding: .5em 2em;
 	border: 0;
-	border-bottom: 3px solid;
+	border-top: 0;
+	border-bottom: 3px solid #04324c;
 	font-size: 1.2em;
 	cursor: pointer;
 	margin: 0;
-	margin-top: -3px;
 	color: #fff;
-	background-color:#0c8cd3;
-	border-color: #04324c;
+	background-color:#0c8cd3;	
 	width: 20%;
     display: block;
     clear: both;
-    margin: 10px 0px;
-
+	margin: 10px 0px;
 }
 
 button:active{
-	margin-top:0px;
-	border: 0;
+	border-top: 3px solid;
+	border-bottom: 0;
 }
 
 button[disabled=disabled], button:disabled {
@@ -135,7 +133,31 @@ button[disabled=disabled], button:disabled {
 }
 
 .paciente-invalido{
-	background-color: #ff9d9d;
+	background-color: #ffd9d9;
 	border: 0.15em solid red;
 	color: #525252;
+}
+.form-error, .form-success{
+	padding: 1em;
+	margin-bottom: 1em;
+	border: .1em solid;
+}
+.form-error{
+	color: red;
+	border-color: red;
+	background-color: #ffd9d9;
+}
+.form-success{
+	color: green;
+	border-color: green;
+	background-color: #d9f9c6;
+}
+.form-error li{
+	list-style: square;
+	margin-left: .5em;
+}
+.remove{
+	transition: 0.3s;
+	line-height: 0;
+	font-size: 0;
 }

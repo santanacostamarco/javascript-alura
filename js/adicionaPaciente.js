@@ -1,32 +1,60 @@
 var botaoAdicionar = document.querySelector("#adicionar-paciente");
 
-botaoAdicionar.addEventListener("click", function(event){
+var botaoAdicionarFn = function(event){
     event.preventDefault();
     var form = document.querySelector("#form-add-paciente");
-    document.querySelector("#tabela-pacientes").appendChild(createTr(form));
-});
+    var paciente = {
+        nome: form.querySelector("#nome").value,
+        peso: form.querySelector("#peso").value,
+        altura: form.querySelector("#altura").value,
+        gordura: form.querySelector("#gordura").value
+    }
+    var notice = document.querySelector("#notice");
+    notice.innerHTML = "";
+    var pacienteValidado = validaPaciente(paciente);
+    if (pacienteValidado.length > 0){
+        
+        var p = document.createElement("p");
+        p.textContent = "Paciente inválido! Por favor verifique os seguintes dados:";
+        var ul = document.createElement("ul");
+        pacienteValidado.forEach(function(erro){
+            var li = document.createElement("li");
+            li.textContent = erro;
+            ul.appendChild(li);
+        });
+        notice.classList.remove("form-success");
+        notice.classList.add("form-error");
+        notice.appendChild(p);
+        notice.appendChild(ul);
+    } else {
+        document.querySelector("#tabela-pacientes").appendChild(createTr(paciente));
+        var p = document.createElement("p");
+        p.textContent = "Paciente incluído com sucesso!";
+        notice.classList.remove("form-error");
+        notice.classList.add("form-success");
+    }
+    form.reset();
+    
+} 
 
-function createTd(val, cls){
+botaoAdicionar.addEventListener("click", botaoAdicionarFn);
+
+var createTd = function (val, cls){
     var td = document.createElement("td");
     td.classList.add(cls);
     td.textContent = val;
     return td;
 }
 
-function createTr(form){
+function createTr(paciente){
     var pacienteTr = document.createElement("tr");
-    var peso = form.querySelector("#peso").value;
-    var altura = form.querySelector("#altura").value;
-    var imc = calculaImc(peso, altura);
+    var imc = calculaImc(paciente.peso, paciente.altura);
     pacienteTr.classList.add("paciente");
-    pacienteTr.appendChild(createTd(form.querySelector("#nome").value, "info-nome"));
-    pacienteTr.appendChild(createTd(peso, "info-peso"));
-    pacienteTr.appendChild(createTd(altura, "info-altura"));
-    pacienteTr.appendChild(createTd(form.querySelector("#gordura").value, "info-gordura"));
+    pacienteTr.appendChild(createTd(paciente.nome, "info-nome"));
+    pacienteTr.appendChild(createTd(paciente.peso, "info-peso"));
+    pacienteTr.appendChild(createTd(paciente.altura, "info-altura"));
+    pacienteTr.appendChild(createTd(paciente.gordura, "info-gordura"));
     pacienteTr.appendChild(createTd(imc, "info-imc"));
-    if (!(imc / 1 == imc)){
-        pacienteTr.classList.add("paciente-invalido");
-    }
     
     return pacienteTr;
 }
