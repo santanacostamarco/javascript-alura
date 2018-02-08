@@ -40,6 +40,7 @@ header .container:before{
 
 section{
 	margin: 2em 0;
+	padding: 0.5em;
 	overflow: hidden;
 }
 
@@ -54,8 +55,8 @@ section h2{
 table{
 	width: 100%;
 	margin-bottom : .5em;
-    table-layout: fixed;
-
+	table-layout: fixed;
+	box-sizing: border-box;
 }
 
 td, th {
@@ -134,7 +135,7 @@ button[disabled=disabled], button:disabled {
 }
 
 .paciente-invalido{
-	border: 2px solid red;
-	color: #f82020;
-	font-weight: bold;
+	background-color: #ff9d9d;
+	border: 0.15em solid red;
+	color: #525252;
 }
