@@ -1,6 +1,5 @@
 var botaoAdicionar = document.querySelector("#adicionar-paciente");
-
-var botaoAdicionarFn = function(event){
+botaoAdicionar.addEventListener("click", function(event){
     event.preventDefault();
     var form = document.querySelector("#form-add-paciente");
     var paciente = {
@@ -11,6 +10,7 @@ var botaoAdicionarFn = function(event){
     }
     var notice = document.querySelector("#notice");
     notice.innerHTML = "";
+
     var pacienteValidado = validaPaciente(paciente);
     if (pacienteValidado.length > 0){
         
@@ -27,18 +27,18 @@ var botaoAdicionarFn = function(event){
         notice.appendChild(p);
         notice.appendChild(ul);
     } else {
-        document.querySelector("#tabela-pacientes").appendChild(createTr(paciente));
+        adicionaNaTabela(paciente);
         var p = document.createElement("p");
         p.textContent = "Paciente incluído com sucesso!";
         notice.classList.remove("form-error");
         notice.classList.add("form-success");
+        notice.appendChild(p);
     }
     form.reset();
-    
-} 
-
-botaoAdicionar.addEventListener("click", botaoAdicionarFn);
-
+});
+function adicionaNaTabela(paciente){
+    document.querySelector("#tabela-pacientes tbody").appendChild(createTr(paciente));
+}
 var createTd = function (val, cls){
     var td = document.createElement("td");
     td.classList.add(cls);
