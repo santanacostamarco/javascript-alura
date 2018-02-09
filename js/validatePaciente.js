@@ -26,7 +26,7 @@ function pacienteIsValid(paciente){
 function validaPaciente(paciente){
     var erros = [];
     if (!nomeIsValid(paciente.nome)) erros.push("Nome");
-    if (!pesoIsValid(paciente.paso)) erros.push("Peso");
+    if (!pesoIsValid(paciente.peso)) erros.push("Peso");
     if (!alturaIsValid(paciente.altura)) erros.push("Altura");
     if (!gorduraIsValid(paciente.gordura)) erros.push("Gordura");
     return erros;
